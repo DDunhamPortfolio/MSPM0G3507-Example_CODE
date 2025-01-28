@@ -1,0 +1,9 @@
+
+- GPIOA:
+	+ High-Speed Output: PA9
+- SYSCTL
+- TIMA0
+- EVENT
+- BOARD:
+	+ Debug Clock: PA20
+	+ Debug Data In Out: PA19

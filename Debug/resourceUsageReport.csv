@@ -1,0 +1,8 @@
+Pin Number,Device Pin Name,IO Type,Assigned Peripheral,Assigned Function ,User Label
+14,PA9,HS,GPIO,High-Speed Output,LED_1
+23,PA20,SD,BOARD,"Debug Clock",
+22,PA19,HS,BOARD,"Debug Data In Out",
+
+
+Peripheral,Usage
+

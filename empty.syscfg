@@ -1,0 +1,53 @@
+/**
+ * These arguments were used when this file was generated. They will be automatically applied on subsequent loads
+ * via the GUI or CLI. Run CLI with '--help' for additional information on how to override these arguments.
+ * @cliArgs --device "MSPM0G350X" --part "Default" --package "VSSOP-28(DGS28)" --product "mspm0_sdk@2.03.00.08"
+ * @v2CliArgs --device "MSPM0G3507" --package "VSSOP-28(DGS28)" --product "mspm0_sdk@2.03.00.08"
+ * @versions {"tool":"1.22.0+3893"}
+ */
+
+/**
+ * Import the modules used in this configuration.
+ */
+const Board         = scripting.addModule("/ti/driverlib/Board");
+const GPIO          = scripting.addModule("/ti/driverlib/GPIO", {}, false);
+const GPIO1         = GPIO.addInstance();
+const TIMER         = scripting.addModule("/ti/driverlib/TIMER", {}, false);
+const TIMER1        = TIMER.addInstance();
+const ProjectConfig = scripting.addModule("/ti/project_config/ProjectConfig");
+
+/**
+ * Write custom configuration values to the imported modules.
+ */
+Board.genPeriphPinFile            = true;
+Board.genResourceCSV              = true;
+Board.peripheral.$assign          = "DEBUGSS";
+Board.peripheral.swclkPin.$assign = "PA20";
+Board.peripheral.swdioPin.$assign = "PA19";
+Board.genFileMod.$name            = "ti_driverlib_BoardPins0";
+Board.genFileCSV.$name            = "ti_driverlib_ResourcesCSV0";
+
+GPIO1.$name                          = "LEDS";
+GPIO1.associatedPins[0].$name        = "LED_1";
+GPIO1.associatedPins[0].assignedPort = "PORTA";
+GPIO1.associatedPins[0].pin.$assign  = "PA9";
+
+const SYSCTL = scripting.addModule("/ti/driverlib/SYSCTL", {}, false);
+
+TIMER1.$name               = "TIMER_0";
+TIMER1.enableRepeatCounter = true;
+TIMER1.interrupts          = ["REPC"];
+TIMER1.timerMode           = "PERIODIC";
+TIMER1.repeatCounter       = 2;
+TIMER1.timerStartTimer     = true;
+TIMER1.timerPeriod         = "1us";
+
+ProjectConfig.migrationCondition = true;
+
+/**
+ * Pinmux solution for unlocked pins/peripherals. This ensures that minor changes to the automatic solver in a future
+ * version of the tool will not impact the pinmux you originally saw.  These lines can be completely deleted in order to
+ * re-solve from scratch.
+ */
+SYSCTL.peripheral.$suggestSolution = "SYSCTL";
+TIMER1.peripheral.$suggestSolution = "TIMA0";
